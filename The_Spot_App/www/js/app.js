@@ -31,7 +31,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',
-        controller : 'loginCtrl'
+       // controller : 'loginCtrl'
     })
 
     .state('register', {
@@ -43,7 +43,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $ionicModal) {
+/*module.controller('loginCtrl', function ($scope, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/home.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -72,7 +72,7 @@ module.controller('loginCtrl', function ($scope, $ionicModal) {
     $scope.showHome = function () {
         $scope.openModal();
     }
-});
+});*/
 
 
 
