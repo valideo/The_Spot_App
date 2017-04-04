@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "www/js"
+  },  
+  "exclude": [
+    "node_modules",     
+    "www/lib",
+    "platforms",
+    "bld",
+    ".vscode"
+  ]
+}
