@@ -39,6 +39,11 @@ module.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/register.html'
     })
 
+    .state('annonce', {
+        url: '/annonce',
+        templateUrl: 'templates/annonce.html'
+    })
+
     $urlRouterProvider.otherwise('home');
 
 });
