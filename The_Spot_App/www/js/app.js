@@ -31,7 +31,6 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',
-       // controller : 'loginCtrl'
     })
 
     .state('register', {
