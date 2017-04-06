@@ -46,12 +46,20 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-module.controller('HomeCtrlLogin', function ($scope, $ionicModal) {
+
+module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
         $scope.modal = modal;
+        $scope.openModalLogin();
+    });
+    $ionicModal.fromTemplateUrl('templates/register.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modalRegister = modal;
         $scope.openModalLogin();
     });
     $scope.openModalLogin = function () {
@@ -60,32 +68,19 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal) {
     $scope.closeModal = function () {
         $scope.modal.hide();
     };
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function () {
-        // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function () {
-        // Execute action
-    });
-});
 
-module.controller('HomeCtrlRegister', function ($scope, $ionicModal) {
-    $ionicModal.fromTemplateUrl('templates/register.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal = modal;
-    });
-    $scope.openModalRegister = function () {
-        $scope.modal.show();
+    $scope.closeModalOpenRegister = function () {
+        $scope.modal.hide().then(function () {
+
+            $scope.modalRegister.show();
+        })
     };
-    $scope.closeModal = function () {
-        $scope.modal.hide();
+
+    $scope.closeModalOpenLogin = function () {
+        $scope.modalRegister.hide().then(function () {
+
+            $scope.modal.show();
+        })
     };
     // Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
@@ -93,14 +88,11 @@ module.controller('HomeCtrlRegister', function ($scope, $ionicModal) {
     });
     // Execute action on hide modal
     $scope.$on('modal.hidden', function () {
-        // Execute action
     });
     // Execute action on remove modal
     $scope.$on('modal.removed', function () {
         // Execute action
     });
-
-
+  
 });
-
 

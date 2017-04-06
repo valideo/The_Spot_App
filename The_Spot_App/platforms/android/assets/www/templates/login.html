@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Login" hide-back-button="true">
+﻿<ion-view view-title="Login" hide-back-button="true" class="modal">
     <div class="bar bar-header bar-positive">
         <h1 class="title">Login</h1>
     </div>
@@ -16,7 +16,7 @@
             Valider
         </button>
 
-        <a ui-sref="register" nav-direction="enter">Pas encore inscrit ?</a>
+        <a ui-sref="#" ng-click="closeModalOpenRegister()">Pas encore inscrit ?</a>
 
     </ion-content>
 </ion-view>
