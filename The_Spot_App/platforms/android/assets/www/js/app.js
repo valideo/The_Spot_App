@@ -46,14 +46,42 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $ionicModal) {
-    $ionicModal.fromTemplateUrl('templates/home.html', {
+module.controller('HomeCtrlLogin', function ($scope, $ionicModal) {
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+        $scope.openModalLogin();
+    });
+    $scope.openModalLogin = function () {
+        $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function () {
+        // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function () {
+        // Execute action
+    });
+});
+
+module.controller('HomeCtrlRegister', function ($scope, $ionicModal) {
+    $ionicModal.fromTemplateUrl('templates/register.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
         $scope.modal = modal;
     });
-    $scope.openModal = function () {
+    $scope.openModalRegister = function () {
         $scope.modal.show();
     };
     $scope.closeModal = function () {
@@ -72,30 +100,7 @@ module.controller('loginCtrl', function ($scope, $ionicModal) {
         // Execute action
     });
 
-    $scope.showHome = function () {
-        $scope.openModal();
-    }
+
 });
-
-
-module.controller('RegisterCtrl', function ($scope, $cordovaImagePicker) {
-
-    var options = {
-        maximumImagesCount: 10,
-        width: 800,
-        height: 800,
-        quality: 80
-    };
-
-    $cordovaImagePicker.getPictures(options)
-      .then(function (results) {
-          for (var i = 0; i < results.length; i++) {
-              console.log('Image URI: ' + results[i]);
-          }
-      }, function (error) {
-          // error getting photos
-      });
-});
-
 
 
