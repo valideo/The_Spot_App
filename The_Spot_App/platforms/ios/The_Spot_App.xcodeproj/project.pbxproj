@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		005A4D1EC7AA4E0E9AFED1FC /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA3737E80C4C6D8498E6C0 /* ELCAssetTablePicker.m */; };
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
