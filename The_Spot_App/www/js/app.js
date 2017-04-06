@@ -48,7 +48,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-/*module.controller('loginCtrl', function ($scope, $ionicModal) {
+module.controller('loginCtrl', function ($scope, $ionicModal) {
     $ionicModal.fromTemplateUrl('templates/home.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -77,7 +77,27 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     $scope.showHome = function () {
         $scope.openModal();
     }
-});*/
+});
+
+
+module.controller('RegisterCtrl', function ($scope, $cordovaImagePicker) {
+
+    var options = {
+        maximumImagesCount: 10,
+        width: 800,
+        height: 800,
+        quality: 80
+    };
+
+    $cordovaImagePicker.getPictures(options)
+      .then(function (results) {
+          for (var i = 0; i < results.length; i++) {
+              console.log('Image URI: ' + results[i]);
+          }
+      }, function (error) {
+          // error getting photos
+      });
+});
 
 
 
