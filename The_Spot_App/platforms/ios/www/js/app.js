@@ -46,18 +46,41 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $ionicModal) {
-    $ionicModal.fromTemplateUrl('templates/home.html', {
+
+module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
+    $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
         $scope.modal = modal;
+        $scope.openModalLogin();
     });
-    $scope.openModal = function () {
+    $ionicModal.fromTemplateUrl('templates/register.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modalRegister = modal;
+        $scope.openModalLogin();
+    });
+    $scope.openModalLogin = function () {
         $scope.modal.show();
     };
     $scope.closeModal = function () {
         $scope.modal.hide();
+    };
+
+    $scope.closeModalOpenRegister = function () {
+        $scope.modal.hide().then(function () {
+
+            $scope.modalRegister.show();
+        })
+    };
+
+    $scope.closeModalOpenLogin = function () {
+        $scope.modalRegister.hide().then(function () {
+
+            $scope.modal.show();
+        })
     };
     // Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
@@ -65,37 +88,55 @@ module.controller('loginCtrl', function ($scope, $ionicModal) {
     });
     // Execute action on hide modal
     $scope.$on('modal.hidden', function () {
-        // Execute action
     });
     // Execute action on remove modal
     $scope.$on('modal.removed', function () {
         // Execute action
     });
 
-    $scope.showHome = function () {
-        $scope.openModal();
+});
+
+module.controller('loginCtrl', function ($scope, $http) {
+
+$scope.user = {};
+
+$scope.login = function() {
+
+  $http({
+    method: 'POST',
+    url: 'http://localhost:3100/api/auth/login',
+    data: $scope.user
+
+  }).then( res => {
+
+    if (res.data.status) {
+      alert(res.data.message);
+
+      // NativeStorage.setItem("id_token",res.data.token, () => {
+      //   console.('token saved');
+      // }, () => {
+      //   console.('token not saved');
+      //
+      // });
+
+    } else {
+      alert(res.data.message);
+
     }
+
+  })
+  .catch(error => {
+
+    console.log(error.status);
+    console.log(error.error); // error message as string
+
+  });
+
+
+
+
+
+}
+
+
 });
-
-
-module.controller('RegisterCtrl', function ($scope, $cordovaImagePicker) {
-
-    var options = {
-        maximumImagesCount: 10,
-        width: 800,
-        height: 800,
-        quality: 80
-    };
-
-    $cordovaImagePicker.getPictures(options)
-      .then(function (results) {
-          for (var i = 0; i < results.length; i++) {
-              console.log('Image URI: ' + results[i]);
-          }
-      }, function (error) {
-          // error getting photos
-      });
-});
-
-
-

@@ -93,6 +93,84 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
     $scope.$on('modal.removed', function () {
         // Execute action
     });
-  
+
 });
 
+module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
+
+  function closeModal() {
+    $scope.modal.hide();
+  };
+
+$scope.user = {};
+
+$scope.login = function() {
+
+  $http({
+    method: 'POST',
+    url: 'http://localhost:3100/api/auth/login',
+    data: $scope.user
+
+  }).then( res => {
+
+    if (res.data.status) {
+      alert(res.data.message);
+      closeModal();
+      // NativeStorage.setItem("id_token",res.data.token, () => {
+      //   console.('token saved');
+      // }, () => {
+      //   console.('token not saved');
+      //
+      // });
+
+    } else {
+      alert(res.data.message);
+
+    }
+
+  })
+  .catch(error => {
+
+    console.log(error.status);
+    console.log(error.error); // error message as string
+
+  });
+
+
+
+
+
+}
+
+
+});
+
+module.controller('registerCtrl', function ($scope, $http) {
+
+  $scope.user = {};
+
+  $scope.register = function() {
+
+    $http({
+      method: 'POST',
+      url: 'http://localhost:3100/api/auth/register',
+      data: $scope.user
+    }).then( res => {
+
+      if (res.data.status) {
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+      }
+
+    })
+    .catch(error => {
+      console.log(error.status);
+      console.log(error.error); // error message as string
+
+    });
+
+  }
+
+
+});

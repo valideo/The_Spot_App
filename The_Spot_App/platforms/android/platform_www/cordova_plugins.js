@@ -52,6 +52,6 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.1.3",
     "ionic-plugin-keyboard": "2.1.0",
     "cordova-plugin-image-picker": "1.1.1"
-};
+}
 // BOTTOM OF METADATA
 });
