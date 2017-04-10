@@ -96,7 +96,6 @@ module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
 
 });
 
-<<<<<<< HEAD
 module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
 
   function closeModal() {
@@ -109,7 +108,7 @@ $scope.login = function() {
 
   $http({
     method: 'POST',
-    url: 'http://localhost:3100/api/auth/login',
+    url: 'https://the-spot-app.herokuapp.com/api/auth/login',
     data: $scope.user
 
   }).then( res => {
@@ -146,7 +145,7 @@ $scope.login = function() {
 
 });
 
-module.controller('registerCtrl', function ($scope, $http) {
+module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker) {
 
   $scope.user = {};
 
@@ -154,7 +153,7 @@ module.controller('registerCtrl', function ($scope, $http) {
 
     $http({
       method: 'POST',
-      url: 'http://localhost:3100/api/auth/register',
+      url: 'https://the-spot-app.herokuapp.com/api/auth/register',
       data: $scope.user
     }).then( res => {
 
@@ -173,26 +172,26 @@ module.controller('registerCtrl', function ($scope, $http) {
 
   }
 
+  var options = {
+      maximumImagesCount: 10,
+      width: 800,
+      height: 800,
+      quality: 80
+  };
+
+$scope.pickImage = function() {
+  // $cordovaImagePicker.getPictures(options)
+  //   .then(function (results) {
+  //     for (var i = 0; i < results.length; i++) {
+  //         console.log('Image URI: ' + results[i]);
+  //     }
+  //   }, function (error) {
+  //       // error getting photos
+  //       console.log('could not get the pictures');
+  // });
+
+  alert('Hey');
+}
+
 
 });
-=======
-module.controller('ImagePickerCtrl', function ($scope, $cordovaImagePicker) {
-
-    var options = {
-        maximumImagesCount: 10,
-        width: 800,
-        height: 800,
-        quality: 80
-    };
-
-    $cordovaImagePicker.getPictures(options)
-      .then(function (results) {
-          for (var i = 0; i < results.length; i++) {
-              console.log('Image URI: ' + results[i]);
-          }
-      }, function (error) {
-          // error getting photos
-      });
-});
-
->>>>>>> da0e64c55fe7c1eb85411f598626a98d05ef4e42

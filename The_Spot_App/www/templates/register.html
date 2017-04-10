@@ -3,38 +3,43 @@
         <h1 class="title">Register</h1>
     </div>
     <ion-content>
-<<<<<<< HEAD
-        <div class="list" style="margin-top : 33%">
-          <label class="item item-input">
-              <input type="text" placeholder="Pseudo" ng-model="user.username">
-          </label>
-=======
-        <div class="list" style="margin-top : 33%" ng-controller="ImagePickerCtrl">
-            <label class="item item-input">
-                <img style="width : 30%; margin-left : 33%;" src="img/profil_default.jpg" />
-            </label>
->>>>>>> da0e64c55fe7c1eb85411f598626a98d05ef4e42
-            <label class="item item-input">
-                <input type="text" placeholder="Nom" ng-model="user.lastname">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Prénom" ng-model="user.firstname">
-            </label>
-            <label class="item item-input">
-                <input type="email" placeholder="Email" ng-model="user.email">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Pays" ng-model="user.country">
-            </label>
-            <label class="item item-input">
-                <input type="password" placeholder="Mot de passe" ng-model="user.password">
-            </label>
+      <div class="list" style="margin-top : 33%">
+        <div class="item item-avatar">
+          <img src="img/profil_default.jpg">
+          <button class="button button-positive" ng-click="pickImage()">
+            Choose Profile Picture
+          </button>
         </div>
+        <label class="item item-input">
+            <input type="text" placeholder="Pseudo" ng-model="user.username">
+        </label>
+          <label class="item item-input">
+              <input type="text" placeholder="Nom" ng-model="user.lastname">
+          </label>
+          <label class="item item-input">
+              <input type="text" placeholder="Prénom" ng-model="user.firstname">
+          </label>
+          <label class="item item-input">
+              <input type="email" placeholder="Email" ng-model="user.email">
+          </label>
+          <label class="item item-input">
+              <input type="text" placeholder="Pays" ng-model="user.country">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Mot de passe" ng-model="user.password">
+          </label>
+      </div>
 
-        <button class="button button-full button-positive" ng-click="register()">
-            Valider
-        </button>
+      <button class="button button-full button-positive" ng-click="register()">
+          Valider
+      </button>
 
-        <a ng-click="closeModalOpenLogin()">Déjà inscrit ?</a>
+      <div class="row">
+        <div class="row row-center">
+          <div class="col">
+            <a ng-click="closeModalOpenLogin()">Déjà inscrit ?</a>
+          </div>
+        </div>
+      </div>
     </ion-content>
 </ion-view>
