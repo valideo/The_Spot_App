@@ -47,7 +47,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
-module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
+module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -94,5 +94,24 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
         // Execute action
     });
   
+});
+
+module.controller('ImagePickerCtrl', function ($scope, $cordovaImagePicker) {
+
+    var options = {
+        maximumImagesCount: 10,
+        width: 800,
+        height: 800,
+        quality: 80
+    };
+
+    $cordovaImagePicker.getPictures(options)
+      .then(function (results) {
+          for (var i = 0; i < results.length; i++) {
+              console.log('Image URI: ' + results[i]);
+          }
+      }, function (error) {
+          // error getting photos
+      });
 });
 
