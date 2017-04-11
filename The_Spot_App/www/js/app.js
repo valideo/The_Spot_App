@@ -96,7 +96,6 @@ module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
 
 });
 
-<<<<<<< HEAD
 module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
 
   function closeModal() {
@@ -175,7 +174,7 @@ module.controller('registerCtrl', function ($scope, $http) {
 
 
 });
-=======
+
 module.controller('ImagePickerCtrl', function ($scope, $cordovaImagePicker) {
 
     var options = {
@@ -195,4 +194,3 @@ module.controller('ImagePickerCtrl', function ($scope, $cordovaImagePicker) {
       });
 });
 
->>>>>>> da0e64c55fe7c1eb85411f598626a98d05ef4e42
