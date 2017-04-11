@@ -145,7 +145,7 @@ $scope.login = function() {
 
 });
 
-module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker) {
+module.controller('registerCtrl', function ($scope, $http) {
 
   $scope.user = {};
 
@@ -171,27 +171,27 @@ module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker) 
     });
 
   }
-
-  var options = {
-      maximumImagesCount: 10,
-      width: 800,
-      height: 800,
-      quality: 80
-  };
-
-$scope.pickImage = function() {
-  // $cordovaImagePicker.getPictures(options)
-  //   .then(function (results) {
-  //     for (var i = 0; i < results.length; i++) {
-  //         console.log('Image URI: ' + results[i]);
-  //     }
-  //   }, function (error) {
-  //       // error getting photos
-  //       console.log('could not get the pictures');
-  // });
-
-  alert('Hey');
-}
+//
+//   var options = {
+//       maximumImagesCount: 10,
+//       width: 800,
+//       height: 800,
+//       quality: 80
+//   };
+//
+// $scope.pickImage = function() {
+//   // $cordovaImagePicker.getPictures(options)
+//   //   .then(function (results) {
+//   //     for (var i = 0; i < results.length; i++) {
+//   //         console.log('Image URI: ' + results[i]);
+//   //     }
+//   //   }, function (error) {
+//   //       // error getting photos
+//   //       console.log('could not get the pictures');
+//   // });
+//
+//   alert('Hey');
+// }
 
 
 });
