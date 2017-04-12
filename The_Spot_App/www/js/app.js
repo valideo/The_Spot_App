@@ -145,9 +145,16 @@ $scope.login = function() {
 
 });
 
-module.controller('registerCtrl', function ($scope, $http) {
+module.controller('registerCtrl', function ($scope, $http, $ionicModal) {
 
-  $scope.user = {};
+    $scope.user = {};
+
+    function closeModalOpenLogin() {
+        $scope.modalRegister.hide().then(function () {
+
+            $scope.modal.show();
+        })
+    };
 
   $scope.register = function() {
 
@@ -158,7 +165,9 @@ module.controller('registerCtrl', function ($scope, $http) {
     }).then( res => {
 
       if (res.data.status) {
-        alert(res.data.message);
+          alert(res.data.message);
+          closeModalOpenLogin();
+
       } else {
         alert(res.data.message);
       }
