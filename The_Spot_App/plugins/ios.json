@@ -28,7 +28,36 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "phonegap-facebook-plugin": {
+            "APP_ID": "429497384056805",
+            "APP_NAME": "SpotApp",
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-filepath": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-camera": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        }
+    }
 }
