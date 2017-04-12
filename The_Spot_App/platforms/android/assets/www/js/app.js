@@ -46,8 +46,14 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
+module.config(function($cordovaFacebookProvider) {
+  var appID = 429497384056805;
+  var version = "v2.0"; // or leave blank and default is v2.0
+  $cordovaFacebookProvider.browserInit(appID, version);
+});
 
-module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
+
+module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -96,7 +102,11 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal, $cordovaFacebook) {
+
+  function closeModal() {
+    $scope.modal.hide();
+  };
 
 $scope.user = {};
 
@@ -104,14 +114,14 @@ $scope.login = function() {
 
   $http({
     method: 'POST',
-    url: 'http://localhost:3100/api/auth/login',
+    url: 'https://the-spot-app.herokuapp.com/api/auth/login',
     data: $scope.user
 
   }).then( res => {
 
     if (res.data.status) {
       alert(res.data.message);
-
+      closeModal();
       // NativeStorage.setItem("id_token",res.data.token, () => {
       //   console.('token saved');
       // }, () => {
@@ -133,10 +143,105 @@ $scope.login = function() {
   });
 
 
+  $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+      .then(function(success) {
+
+        console.log(success);
+        // { id: "634565435",
+        //   lastName: "bob"
+        //   ...
+        // }
+      }, function (error) {
+        // error
+      });
+
+
+    // var options = {
+    //   method: "feed",
+    //   link: "http://example.com",
+    //   caption: "Such caption, very feed."
+    // };
+    // $cordovaFacebook.showDialog(options)
+    //   .then(function(success) {
+    //     // success
+    //   }, function (error) {
+    //     // error
+    //   });
+
+    //
+    // $cordovaFacebook.api("me", ["public_profile"])
+    //   .then(function(success) {
+    //     // success
+    //   }, function (error) {
+    //     // error
+    //   });
+
+
+    $cordovaFacebook.getLoginStatus()
+      .then(function(success) {
+        /*
+        { authResponse: {
+            userID: "12345678912345",
+            accessToken: "kgkh3g42kh4g23kh4g2kh34g2kg4k2h4gkh3g4k2h4gk23h4gk2h34gk234gk2h34AndSoOn",
+            session_Key: true,
+            expiresIn: "5183738",
+            sig: "..."
+          },
+          status: "connected"
+        }
+        */
+      }, function (error) {
+        // error
+      });
+
+    $cordovaFacebook.getAccessToken()
+      .then(function(success) {
+        // success
+      }, function (error) {
+        // error
+      });
+
+    $cordovaFacebook.logout()
+      .then(function(success) {
+        // success
+      }, function (error) {
+        // error
+      });
+
+
 
 
 
 }
 
+
+});
+
+module.controller('registerCtrl', function ($scope, $http) {
+
+  $scope.user = {};
+
+  $scope.register = function() {
+
+    $http({
+      method: 'POST',
+      url: 'https://the-spot-app.herokuapp.com/api/auth/register',
+      data: $scope.user
+    }).then( res => {
+
+      if (res.data.status) {
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+      }
+
+    })
+    .catch(error => {
+      console.log(error.status);
+      console.log(error.error); // error message as string
+
+    });
+
+  }
 
 });

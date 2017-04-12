@@ -3,7 +3,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var module = angular.module('starter', ['ionic']);
+var module = angular.module('starter', ['ionic','ngCordova']);
 
     module.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -45,6 +45,13 @@ module.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('home');
 
 });
+
+module.config(function($cordovaFacebookProvider) {
+  var appID = 429497384056805;
+  var version = "v2.0"; // or leave blank and default is v2.0
+  $cordovaFacebookProvider.browserInit(appID, version);
+});
+
 
 
 module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
@@ -96,11 +103,14 @@ module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal, $cordovaFacebook) {
+
 
   function closeModal() {
     $scope.modal.hide();
   };
+
+
 
 $scope.user = {};
 
@@ -136,10 +146,6 @@ $scope.login = function() {
 
   });
 
-
-
-
-
 }
 
 
@@ -171,27 +177,5 @@ module.controller('registerCtrl', function ($scope, $http) {
     });
 
   }
-//
-//   var options = {
-//       maximumImagesCount: 10,
-//       width: 800,
-//       height: 800,
-//       quality: 80
-//   };
-//
-// $scope.pickImage = function() {
-//   // $cordovaImagePicker.getPictures(options)
-//   //   .then(function (results) {
-//   //     for (var i = 0; i < results.length; i++) {
-//   //         console.log('Image URI: ' + results[i]);
-//   //     }
-//   //   }, function (error) {
-//   //       // error getting photos
-//   //       console.log('could not get the pictures');
-//   // });
-//
-//   alert('Hey');
-// }
-
 
 });

@@ -3,7 +3,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var module = angular.module('starter', ['ionic']);
+var module = angular.module('starter', ['ionic','ngCordova']);
 
     module.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -47,7 +47,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
-module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
+module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -96,7 +96,13 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
+
+  function closeModal() {
+    $scope.modal.hide();
+  };
+
+
 
 $scope.user = {};
 
@@ -104,14 +110,14 @@ $scope.login = function() {
 
   $http({
     method: 'POST',
-    url: 'http://localhost:3100/api/auth/login',
+    url: 'https://the-spot-app.herokuapp.com/api/auth/login',
     data: $scope.user
 
   }).then( res => {
 
     if (res.data.status) {
       alert(res.data.message);
-
+      closeModal();
       // NativeStorage.setItem("id_token",res.data.token, () => {
       //   console.('token saved');
       // }, () => {
@@ -132,11 +138,66 @@ $scope.login = function() {
 
   });
 
-
-
-
-
 }
 
+
+});
+
+module.controller('registerCtrl', function ($scope, $http, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet) {
+
+  $scope.image = null;
+
+  $scope.showAlert = function(title, msg) {
+    var alertPopup = $ionicPopup.alert({
+      title: title,
+      template: msg
+    });
+  };
+
+  $scope.loadImage = function() {
+  var options = {
+    title: 'Select Image Source',
+    buttonLabels: ['Load from Library', 'Use Camera'],
+    addCancelButtonWithLabel: 'Cancel',
+    androidEnableCancelButton : true,
+  };
+  $cordovaActionSheet.show(options).then(function(btnIndex) {
+    var type = null;
+    if (btnIndex === 1) {
+      type = Camera.PictureSourceType.PHOTOLIBRARY;
+    } else if (btnIndex === 2) {
+      type = Camera.PictureSourceType.CAMERA;
+    }
+    if (type !== null) {
+      $scope.selectPicture(type);
+    }
+  });
+  };
+
+
+  $scope.user = {};
+
+  $scope.register = function() {
+
+    $http({
+      method: 'POST',
+      url: 'https://the-spot-app.herokuapp.com/api/auth/register',
+      data: $scope.user
+    }).then( res => {
+
+      if (res.data.status) {
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+      }
+
+    })
+    .catch(error => {
+      console.log(error.status);
+      console.log(error.error); // error message as string
+
+    });
+
+  }
 
 });
