@@ -11,9 +11,14 @@
                 <input type="password" placeholder="Password" ng-model="user.password">
             </label>
         </div>
-        {{ username }}
         <button class="button button-full button-positive" ng-click="login()">
             Valider
+        </button>
+        <button class="button button-full" id="facebook_button" ng-click="facebookLogin()">
+            Se Connecter avec Facebook
+        </button>
+        <button class="button button-full" id="twitter_button" ng-click="twitterLogin()">
+            Se Connecter avec Twitter
         </button>
 
         <a ui-sref="#" ng-click="closeModalOpenRegister()">Pas encore inscrit ?</a>

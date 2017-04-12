@@ -3,7 +3,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var module = angular.module('starter', ['ionic']);
+var module = angular.module('starter', ['ionic','ngCordova']);
 
     module.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -47,7 +47,7 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
-module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
+module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -96,7 +96,20 @@ module.controller('HomeCtrlLogin', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal, $ionicPopup, $timeout) {
+
+
+  function closeModal() {
+    $scope.modal.hide();
+  };
+
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
 
 $scope.user = {};
 
@@ -104,13 +117,15 @@ $scope.login = function() {
 
   $http({
     method: 'POST',
-    url: 'http://localhost:3100/api/auth/login',
+    url: 'https://the-spot-app.herokuapp.com/api/auth/login',
     data: $scope.user
 
   }).then( res => {
 
     if (res.data.status) {
-      alert(res.data.message);
+      showAlert('Félicitation','Vous êtes bien connecté ' + res.data.user.firstname + ' ' + res.data.user.lastname , function(){
+        closeModal();
+      });
 
       // NativeStorage.setItem("id_token",res.data.token, () => {
       //   console.('token saved');
@@ -120,7 +135,8 @@ $scope.login = function() {
       // });
 
     } else {
-      alert(res.data.message);
+      showAlert('Désoleé',res.data.message, function(){
+      });
 
     }
 
@@ -132,11 +148,88 @@ $scope.login = function() {
 
   });
 
-
-
-
-
 }
 
+$scope.facebookLogin = function() {
+  $http({
+    method: 'GET',
+    url: 'http://localhost:3100/api/auth/facebook',
+  }).then( res => {
+    console.log(res.data);
+  });
+
+
+  }
+
+
+});
+
+module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, $ionicPopup, $timeout) {
+
+   function closeModalOpenLogin () {
+      $scope.modalRegister.hide().then(function () {
+
+          $scope.modal.show();
+      })
+  };
+
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
+
+  //
+  //
+  // var options = {
+  //    maximumImagesCount: 10,
+  //    width: 800,
+  //    height: 800,
+  //    quality: 80
+  //   };
+  //
+  //   $cordovaImagePicker.getPictures(options)
+  //     .then(function (results) {
+  //       for (var i = 0; i < results.length; i++) {
+  //         console.log('Image URI: ' + results[i]);
+  //       }
+  //     }, function(error) {
+  //       // error getting photos
+  //     });
+  // });
+  //
+
+  $scope.roles = [{
+      value: 'seller',
+      label: 'Vendeur'
+    }, {
+      value: 'customer',
+      label: 'Client'
+    }];
+
+  $scope.user = {};
+
+  $scope.register = function() {
+
+    $http({
+      method: 'POST',
+      url: 'https://the-spot-app.herokuapp.com/api/auth/register',
+      data: $scope.user
+    }).then( res => {
+
+      if (res.data.status) {
+        showAlert('Félicitation','Votre compte a bien été crée ' , function(){
+          closeModalOpenLogin();
+        });
+      } else {
+        showAlert('Désoleé',res.data.message, function(){
+        });
+      }
+
+    });
+
+  }
 
 });
