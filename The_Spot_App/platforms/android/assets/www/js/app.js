@@ -3,7 +3,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var module = angular.module('starter', ['ionic']);
+var module = angular.module('starter', ['ionic','ngCordova']);
 
     module.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -44,12 +44,6 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('home');
 
-});
-
-module.config(function($cordovaFacebookProvider) {
-  var appID = 429497384056805;
-  var version = "v2.0"; // or leave blank and default is v2.0
-  $cordovaFacebookProvider.browserInit(appID, version);
 });
 
 
@@ -102,11 +96,20 @@ module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http, $ionicModal, $cordovaFacebook) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal, $ionicPopup, $timeout) {
+
 
   function closeModal() {
     $scope.modal.hide();
   };
+
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
 
 $scope.user = {};
 
@@ -120,8 +123,10 @@ $scope.login = function() {
   }).then( res => {
 
     if (res.data.status) {
-      alert(res.data.message);
-      closeModal();
+      showAlert('Félicitation','Vous êtes bien connecté ' + res.data.user.firstname + ' ' + res.data.user.lastname , function(){
+        closeModal();
+      });
+
       // NativeStorage.setItem("id_token",res.data.token, () => {
       //   console.('token saved');
       // }, () => {
@@ -130,7 +135,8 @@ $scope.login = function() {
       // });
 
     } else {
-      alert(res.data.message);
+      showAlert('Désoleé',res.data.message, function(){
+      });
 
     }
 
@@ -142,82 +148,66 @@ $scope.login = function() {
 
   });
 
-
-  $cordovaFacebook.login(["public_profile", "email", "user_friends"])
-      .then(function(success) {
-
-        console.log(success);
-        // { id: "634565435",
-        //   lastName: "bob"
-        //   ...
-        // }
-      }, function (error) {
-        // error
-      });
-
-
-    // var options = {
-    //   method: "feed",
-    //   link: "http://example.com",
-    //   caption: "Such caption, very feed."
-    // };
-    // $cordovaFacebook.showDialog(options)
-    //   .then(function(success) {
-    //     // success
-    //   }, function (error) {
-    //     // error
-    //   });
-
-    //
-    // $cordovaFacebook.api("me", ["public_profile"])
-    //   .then(function(success) {
-    //     // success
-    //   }, function (error) {
-    //     // error
-    //   });
-
-
-    $cordovaFacebook.getLoginStatus()
-      .then(function(success) {
-        /*
-        { authResponse: {
-            userID: "12345678912345",
-            accessToken: "kgkh3g42kh4g23kh4g2kh34g2kg4k2h4gkh3g4k2h4gk23h4gk2h34gk234gk2h34AndSoOn",
-            session_Key: true,
-            expiresIn: "5183738",
-            sig: "..."
-          },
-          status: "connected"
-        }
-        */
-      }, function (error) {
-        // error
-      });
-
-    $cordovaFacebook.getAccessToken()
-      .then(function(success) {
-        // success
-      }, function (error) {
-        // error
-      });
-
-    $cordovaFacebook.logout()
-      .then(function(success) {
-        // success
-      }, function (error) {
-        // error
-      });
-
-
-
-
-
 }
+
+$scope.facebookLogin = function() {
+  $http({
+    method: 'GET',
+    url: 'http://localhost:3100/api/auth/facebook',
+  }).then( res => {
+    console.log(res.data);
+  });
+
+
+  }
 
 
 });
 
-module.controller('registerCtrl', function ($scope, $http) {
+module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, $ionicPopup, $timeout) {
+
+   function closeModalOpenLogin () {
+      $scope.modalRegister.hide().then(function () {
+
+          $scope.modal.show();
+      })
+  };
+
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
+
+  //
+  //
+  // var options = {
+  //    maximumImagesCount: 10,
+  //    width: 800,
+  //    height: 800,
+  //    quality: 80
+  //   };
+  //
+  //   $cordovaImagePicker.getPictures(options)
+  //     .then(function (results) {
+  //       for (var i = 0; i < results.length; i++) {
+  //         console.log('Image URI: ' + results[i]);
+  //       }
+  //     }, function(error) {
+  //       // error getting photos
+  //     });
+  // });
+  //
+
+  $scope.roles = [{
+      value: 'seller',
+      label: 'Vendeur'
+    }, {
+      value: 'customer',
+      label: 'Client'
+    }];
 
   $scope.user = {};
 
@@ -230,15 +220,13 @@ module.controller('registerCtrl', function ($scope, $http) {
     }).then( res => {
 
       if (res.data.status) {
-        alert(res.data.message);
+        showAlert('Félicitation','Votre compte a bien été crée ' , function(){
+          closeModalOpenLogin();
+        });
       } else {
-        alert(res.data.message);
+        showAlert('Désoleé',res.data.message, function(){
+        });
       }
-
-    })
-    .catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
 
     });
 

@@ -4,12 +4,6 @@
     </div>
     <ion-content>
       <div class="list" style="margin-top : 33%">
-        <div class="item item-avatar">
-          <img ng-src="{{pathForImage(image)}}">
-          <button class="button button-positive" ng-click="uploadImage()">
-            Choose Profile Picture
-          </button>
-        </div>
         <label class="item item-input">
             <input type="text" placeholder="Pseudo" ng-model="user.username">
         </label>
@@ -28,6 +22,18 @@
           <label class="item item-input">
               <input type="password" placeholder="Mot de passe" ng-model="user.password">
           </label>
+          <div class="list">
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+               Type de compte
+            </div>
+            <select ng-model="user.role" ng-options="role as role.label for role in roles">
+              <option value=""></option>
+            </select>
+          </label>
+
+</div>
       </div>
 
       <button class="button button-full button-positive" ng-click="register()">

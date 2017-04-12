@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		005A4D1EC7AA4E0E9AFED1FC /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CA3737E80C4C6D8498E6C0 /* ELCAssetTablePicker.m */; };
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
@@ -49,6 +48,7 @@
 		ECB700ACEBC542B18BBAEA5D /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72BEE57D2144B91A0BBF59A /* ELCImagePickerController.m */; };
 		ED74B51253354087BD6DCBD0 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 335BF0B5A0114BCF86432649 /* Overlay.png */; };
 		F0FCA19E178342E1B5300D8A /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1770EA3C45C4949A397BFBF /* ELCAssetCell.m */; };
+		A9389287255B41639FB342EB /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB71EB244F9CB1CA884E /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +148,8 @@
 		F4727DF3FC6A46E993C3EBB0 /* libsqlite3.dylib */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = The_Spot_App/config.xml; sourceTree = "<group>"; };
 		FF5E8C2E526E41BA80FE2FE4 /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVJpegHeaderWriter.m; path = "cordova-plugin-camera/CDVJpegHeaderWriter.m"; sourceTree = "<group>"; };
+		2525BB71EB244F9CB1CA884E /* CDVInAppBrowser.m */ = {isa = PBXFileReference; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		31BD0EA21320438DB0AB3799 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,8 @@
 				30B252CB0BBC4F75ACC2061F /* CDVExif.h */,
 				016EFE66838D4CC19BA2520A /* ActionSheet.m */,
 				7D36009CCA194F1093EDDD6C /* ActionSheet.h */,
+				2525BB71EB244F9CB1CA884E /* CDVInAppBrowser.m */,
+				31BD0EA21320438DB0AB3799 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = The_Spot_App/Plugins;
@@ -361,7 +365,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 820;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = CMKH744XR8;
@@ -465,6 +469,7 @@
 				577F6F99ED014B05AA655D8A /* CDVCamera.m in Sources */,
 				EC0AEFAD85B44DAA81627D96 /* CDVJpegHeaderWriter.m in Sources */,
 				AA8163B6419B4ECD92F77CE9 /* ActionSheet.m in Sources */,
+				A9389287255B41639FB342EB /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

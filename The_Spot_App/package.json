@@ -31,7 +31,8 @@
     "cordova-plugin-file-transfer",
     "cordova-plugin-filepath",
     "cordova-plugin-camera",
-    "cordova-plugin-actionsheet"
+    "cordova-plugin-actionsheet",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "android",

@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+#facebook_button {
+  background-color: #3C5A96;
+  color: white;
+}
+
+#twitter_button {
+  background-color: #299DE7;
+  color: white;
+}

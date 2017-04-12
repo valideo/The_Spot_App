@@ -79,6 +79,10 @@
                         {
                             "xml": "<feature name=\"ActionSheet\"><param name=\"android-package\" value=\"nl.xservices.plugins.actionsheet.ActionSheet\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -182,6 +186,9 @@
             "PACKAGE_NAME": "io.cordova.myapp6b1843"
         },
         "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "io.cordova.myapp6b1843"
+        },
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "io.cordova.myapp6b1843"
         }
     },
@@ -472,6 +479,15 @@
             "clobbers": [
                 "window.plugins.actionsheet"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "pluginId": "cordova-plugin-inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -488,6 +504,7 @@
         "cordova-plugin-file-transfer": "1.6.2",
         "cordova-plugin-filepath": "1.0.2",
         "cordova-plugin-camera": "2.4.0",
-        "cordova-plugin-actionsheet": "2.3.3"
+        "cordova-plugin-actionsheet": "2.3.3",
+        "cordova-plugin-inappbrowser": "1.7.0"
     }
 }

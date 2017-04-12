@@ -293,6 +293,15 @@ module.exports = [
         "clobbers": [
             "window.plugins.actionsheet"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -311,7 +320,8 @@ module.exports.metadata =
     "cordova-plugin-file-transfer": "1.6.2",
     "cordova-plugin-filepath": "1.0.2",
     "cordova-plugin-camera": "2.4.0",
-    "cordova-plugin-actionsheet": "2.3.3"
+    "cordova-plugin-actionsheet": "2.3.3",
+    "cordova-plugin-inappbrowser": "1.7.0"
 }
 // BOTTOM OF METADATA
 });

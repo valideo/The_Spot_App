@@ -46,6 +46,18 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
+module.config(function($cordovaInAppBrowserProvider) {
+
+  var defaultOptions = {
+    location: 'no',
+    clearcache: 'no',
+    toolbar: 'no'
+  };
+
+  $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions)
+
+});
+
 
 module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
     $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -96,13 +108,20 @@ module.controller('HomeCtrl', function ($scope, $ionicModal, $state) {
 
 });
 
-module.controller('loginCtrl', function ($scope, $http, $ionicModal) {
+module.controller('loginCtrl', function ($scope, $http, $ionicModal, $ionicPopup, $timeout, $cordovaInAppBrowser) {
+
 
   function closeModal() {
     $scope.modal.hide();
   };
 
-
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
 
 $scope.user = {};
 
@@ -116,8 +135,10 @@ $scope.login = function() {
   }).then( res => {
 
     if (res.data.status) {
-      alert(res.data.message);
-      closeModal();
+      showAlert('Félicitation','Vous êtes bien connecté ' + res.data.user.firstname + ' ' + res.data.user.lastname , function(){
+        closeModal();
+      });
+
       // NativeStorage.setItem("id_token",res.data.token, () => {
       //   console.('token saved');
       // }, () => {
@@ -126,7 +147,8 @@ $scope.login = function() {
       // });
 
     } else {
-      alert(res.data.message);
+      showAlert('Désoleé',res.data.message, function(){
+      });
 
     }
 
@@ -140,40 +162,80 @@ $scope.login = function() {
 
 }
 
+$scope.facebookLogin = function() {
+  // $http({
+  //   method: 'GET',
+  //   url: 'http://localhost:3100/api/auth/facebook',
+  // }).then( res => {
+  //   console.log(res.data);
+  // });
+
+  var options = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+      };
+
+      $cordovaInAppBrowser.open('http://localhost:3100/api/auth/facebook', '_blank', options)
+        .then(function(event) {
+          // success
+        })
+        .catch(function(event) {
+          // error
+        });
+
+      $cordovaInAppBrowser.close();
+
+
+  }
+
 
 });
 
-module.controller('registerCtrl', function ($scope, $http, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet) {
+module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, $ionicPopup, $timeout) {
 
-  $scope.image = null;
+   function closeModalOpenLogin () {
+      $scope.modalRegister.hide().then(function () {
 
-  $scope.showAlert = function(title, msg) {
-    var alertPopup = $ionicPopup.alert({
-      title: title,
-      template: msg
-    });
+          $scope.modal.show();
+      })
   };
 
-  $scope.loadImage = function() {
-  var options = {
-    title: 'Select Image Source',
-    buttonLabels: ['Load from Library', 'Use Camera'],
-    addCancelButtonWithLabel: 'Cancel',
-    androidEnableCancelButton : true,
-  };
-  $cordovaActionSheet.show(options).then(function(btnIndex) {
-    var type = null;
-    if (btnIndex === 1) {
-      type = Camera.PictureSourceType.PHOTOLIBRARY;
-    } else if (btnIndex === 2) {
-      type = Camera.PictureSourceType.CAMERA;
-    }
-    if (type !== null) {
-      $scope.selectPicture(type);
-    }
-  });
-  };
+  function showAlert (title,description,callback) {
+     var alertPopup = $ionicPopup.alert({
+       title: title,
+       template: description
+     });
+     callback();
+   };
 
+  //
+  //
+  // var options = {
+  //    maximumImagesCount: 10,
+  //    width: 800,
+  //    height: 800,
+  //    quality: 80
+  //   };
+  //
+  //   $cordovaImagePicker.getPictures(options)
+  //     .then(function (results) {
+  //       for (var i = 0; i < results.length; i++) {
+  //         console.log('Image URI: ' + results[i]);
+  //       }
+  //     }, function(error) {
+  //       // error getting photos
+  //     });
+  // });
+  //
+
+  $scope.roles = [{
+      value: 'seller',
+      label: 'Vendeur'
+    }, {
+      value: 'customer',
+      label: 'Client'
+    }];
 
   $scope.user = {};
 
@@ -186,15 +248,13 @@ module.controller('registerCtrl', function ($scope, $http, $cordovaCamera, $cord
     }).then( res => {
 
       if (res.data.status) {
-        alert(res.data.message);
+        showAlert('Félicitation','Votre compte a bien été crée ' , function(){
+          closeModalOpenLogin();
+        });
       } else {
-        alert(res.data.message);
+        showAlert('Désoleé',res.data.message, function(){
+        });
       }
-
-    })
-    .catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
 
     });
 
