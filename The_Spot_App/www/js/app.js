@@ -42,6 +42,16 @@ module.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/annonce.html'
     })
 
+    .state('newAnnonce', {
+        url: '/new',
+        templateUrl: 'templates/newAnnonce.html'
+    })
+
+    .state('myAnnonces', {
+        url: '/myAnnonces',
+        templateUrl: 'templates/myAnnonces.html'
+    })
+
     $urlRouterProvider.otherwise('home');
 
 });
