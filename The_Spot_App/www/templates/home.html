@@ -1,4 +1,4 @@
-﻿<ion-view view-title="Home">
+﻿<ion-view view-title="Home" >
     <ion-header-bar class="bar-light bar-subheader">
         <input type="search"
                placeholder="Chercher"
@@ -8,45 +8,18 @@
                ng-change="scrollTop()"
                class="full-width">
     </ion-header-bar>
-    <ion-content style="margin-top: 2px;">
+    <ion-content style="margin-top: 2px;" ng-controller="HomeCtrl">
         <div class="list">
+          <div  ng-repeat="announce in announces;">
+            <a class="item item-thumbnail-left" >
+                <img class="img-responsive" src="{{ announce.imageURL }}">
+                <h2>{{ announce.title }}</h2>
+                <p>{{ announce.createdAt }}</p>
 
-            <a class="item item-thumbnail-left" ng-controller="HomeCtrl" href="#">
-                <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
+                <p>{{ announce.category }}</p>
+                <p>{{ announce.price }}</p>
             </a>
-            <a class="item item-thumbnail-left" href="#">
-                <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
-            </a>
-            <a class="item item-thumbnail-left" href="#">
-                <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
-            </a>
-            <a class="item item-thumbnail-left" href="#">
-                <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
-            </a>
-            <a class="item item-thumbnail-left" href="#">
-                <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
-            </a>
-
+          </div>
         </div>
     </ion-content>
 </ion-view>

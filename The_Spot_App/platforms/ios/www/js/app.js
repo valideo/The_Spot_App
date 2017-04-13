@@ -54,7 +54,7 @@ module.config(function($cordovaInAppBrowserProvider) {
     toolbar: 'no'
   };
 
-  $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions)
+  $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
 
 });
 
@@ -192,7 +192,7 @@ $scope.facebookLogin = function() {
 
 });
 
-module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, $ionicPopup, $timeout) {
+module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, $ionicPopup, $timeout,$cordovaImagePicker) {
 
    function closeModalOpenLogin () {
       $scope.modalRegister.hide().then(function () {
@@ -258,6 +258,24 @@ module.controller('registerCtrl', function ($scope, $http, $cordovaImagePicker, 
 
     });
 
+  }
+
+  $scope.pickImage = function(){
+    var options = {
+   maximumImagesCount: 10,
+   width: 800,
+   height: 800,
+   quality: 80
+  };
+
+  $cordovaImagePicker.getPictures(options)
+    .then(function (results) {
+      for (var i = 0; i < results.length; i++) {
+        console.log('Image URI: ' + results[i]);
+      }
+    }, function(error) {
+      // error getting photos
+    });
   }
 
 });
