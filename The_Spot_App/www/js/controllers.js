@@ -15,9 +15,13 @@ module.controller('HomeCtrl', function ($scope, $http, $ionicModal, $state) {
         $scope.modalRegister = modal;
         $scope.openModalLogin();
     });
-    $scope.openModalLogin = function () {
-        $scope.modal.show();
-    };
+
+    if (localStorage.getItem('isLoggedIn') == false) {
+      $scope.openModalLogin = function () {
+          $scope.modal.show();
+      };
+    }
+
     $scope.closeModal = function () {
         $scope.modal.hide();
     };
@@ -53,12 +57,6 @@ module.controller('HomeCtrl', function ($scope, $http, $ionicModal, $state) {
   }).then( res => {
     $scope.announces = res.data;
     console.log($scope.announces);
-      // NativeStorage.setItem("id_token",res.data.token, () => {
-      //   console.('token saved');
-      // }, () => {
-      //   console.('token not saved');
-      //
-      // });
   })
   .catch(error => {
 
@@ -102,12 +100,10 @@ $scope.login = function() {
         closeModal();
       });
 
-      // NativeStorage.setItem("id_token",res.data.token, () => {
-      //   console.('token saved');
-      // }, () => {
-      //   console.('token not saved');
-      //
-      // });
+      localStorage.setItem('id_token',res.data.token);
+      localStorage.setItem('user',JSON.stringify(res.data.user));
+      localStorage.setItem('isLoggedIn',true);
+
 
     } else {
       showAlert('Désoleé',res.data.message, function(){
@@ -127,6 +123,10 @@ $scope.login = function() {
 
 
 });
+
+$scope.logOut = function (){
+
+}
 
 module.controller('registerCtrl', function ($scope, $http, $ionicPopup, $timeout) {
 
