@@ -11,7 +11,7 @@
     <ion-content style="margin-top: 2px;" ng-controller="HomeCtrl">
         <div class="list">
           <div  ng-repeat="announce in announces;">
-            <a class="item item-thumbnail-left" >
+            <a class="item item-thumbnail-left" ui-sref="annonce" >
                 <img class="img-responsive" src="{{ announce.imageURL }}">
                 <h2>{{ announce.title }}</h2>
                 <p>{{ announce.createdAt }}</p>
