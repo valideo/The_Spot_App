@@ -125,7 +125,9 @@ $scope.login = function() {
 });
 
 $scope.logOut = function (){
-
+  localStorage.removeItem('id_token',res.data.token);
+  localStorage.removeItem('user',JSON.stringify(res.data.user));
+  localStorage.setItem('isLoggedIn',false);
 }
 
 module.controller('registerCtrl', function ($scope, $http, $ionicPopup, $timeout) {
