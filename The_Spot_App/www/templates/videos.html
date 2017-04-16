@@ -1,16 +1,22 @@
-﻿<ion-view view-title="Videos" >
+﻿<ion-view view-title="Videos" ng-controller="announceVideoCtrl">
     <ion-content style="margin-top: 2px;">
-        <div class="list">
-          <div  ng-repeat="announce in announces;">
-            <a class="item item-thumbnail-left" ui-sref="annonce" >
-                <img class="img-responsive" src="{{ announce.imageURL }}">
-                <h2>{{ announce.title }}</h2>
-                <p>{{ announce.createdAt }}</p>
-
-                <p>{{ announce.category }}</p>
-                <p>{{ announce.price }}</p>
-            </a>
-          </div>
+      <div class="list card" ng-repeat="video in videos;">
+        <div class="item item-image" ng-if="video.snippet.thumbnails.maxres">
+          <img src="{{ video.snippet.thumbnails.maxres.url }}"/>
         </div>
+        <div class="item item-image" ng-if="!video.snippet.thumbnails.maxres">
+          <img src="{{ video.snippet.thumbnails.standard.url }}"/>
+        </div>
+        <div class="item item-image" ng-if="!video.snippet.thumbnails.standard">
+          <img src="{{ video.snippet.thumbnails.high.url }}"/>
+        </div>
+        <div class="item item-image" ng-if="!video.snippet.thumbnails.high">
+          <img src="{{ video.snippet.thumbnails.medium.url }}"/>
+        </div>
+        <div class="item item-image" ng-if="!video.snippet.thumbnails.medium">
+          <img src="{{ video.snippet.thumbnails.default.url }}"/>
+        </div>
+        {{ video.snippet.title}}
+      </div>
     </ion-content>
 </ion-view>

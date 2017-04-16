@@ -271,3 +271,15 @@ module.controller('newAnnounceCtrl', function ($scope, $http ) {
     }
 
   });
+
+
+  module.controller('announceVideoCtrl', function ($scope, $http ) {
+
+    $http({
+      method: 'GET',
+      url: "https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyCrYZptTtWO29e5WWOZWbGIRGrJ5ndVW0M&playlistId=PLFmYNJ_DUU2A4ku_lvdUtYl74cLbN_xJi&maxResults=22&part=snippet"
+    }).then( res => {
+      $scope.videos = res.data.items;
+    });
+
+});
