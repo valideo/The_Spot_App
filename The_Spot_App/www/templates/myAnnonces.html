@@ -1,19 +1,19 @@
-﻿<ion-view view-title="Titre annonce">
+﻿<ion-view view-title="Titre annonce" ng-controller="myAnnoncesCtrl">
     <ion-content>
-        <div class="list">
+        <div class="list" ng-repeat="announce in announces; track by $index">
 
-            <a class="item item-thumbnail-left" href="#">
+            <a class="item item-thumbnail-left">
                 <img src="cover.jpg">
-                <h2>Annonce</h2>
-                <p>Catégorie</p>
-                <p>Prix</p>
-                <p>Date</p>
+                <h2>{{ announce.title }}</h2>
+                <p>{{ announce.category}}</p>
+                <p>{{ announce.prix }}</p>
+                <p>{{ announce.createdAt}}</p>
             </a>
             <div class="button-bar">
                 <a class="button">Modifier</a>
                 <a class="button">Supprimer</a>
             </div>
-            
+
             </div>
 </ion-content>
 </ion-view>

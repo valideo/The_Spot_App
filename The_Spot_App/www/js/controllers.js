@@ -283,3 +283,16 @@ module.controller('newAnnounceCtrl', function ($scope, $http ) {
     });
 
 });
+
+module.controller('myAnnoncesCtrl', function ($scope, $http ) {
+  $scope.publisherId = JSON.parse(localStorage.getItem('user')).uid;
+
+  $http({
+    method: 'POST',
+    url: "https://the-spot-app.herokuapp.com/api/announces/annonces",
+    data: $scope.publisherId
+  }).then( res => {
+    $scope.videos = res.data.items;
+  });
+
+});
