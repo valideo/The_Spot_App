@@ -47,6 +47,11 @@ module.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/newAnnonce.html'
     })
 
+        .state('videos', {
+            url: '/videos',
+            templateUrl: 'templates/videos.html'
+        })
+
     .state('myAnnonces', {
         url: '/myAnnonces',
         templateUrl: 'templates/myAnnonces.html'
