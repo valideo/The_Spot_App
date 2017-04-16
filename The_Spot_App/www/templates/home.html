@@ -10,8 +10,8 @@
     </ion-header-bar>
     <ion-content style="margin-top: 2px;" ng-controller="HomeCtrl">
         <div class="list">
-          <div  ng-repeat="announce in announces;">
-            <a class="item item-thumbnail-left" ui-sref="annonce" >
+          <div  ng-repeat="announce in announces; track by $index">
+            <a class="item item-thumbnail-left" ui-sref="annonce" ng-click="selectAnnounce(announce)">
                 <img class="img-responsive" src="{{ announce.imageURL }}">
                 <h2>{{ announce.title }}</h2>
                 <p>{{ announce.createdAt }}</p>
